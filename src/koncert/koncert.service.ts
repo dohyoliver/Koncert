@@ -8,10 +8,17 @@ export class KoncertService {
   constructor(private readonly db: PrismaService){
 
   }
- async create(data: CreateKoncertDto) {
- return this.db.koncert.create({
-  data,
- })
+  async create(data: CreateKoncertDto) {
+    const currentDate = new Date();
+    
+   
+    if (new Date(data.kezdesi_ido) < currentDate) {
+      throw new Error('The concert date cannot be in the past.');
+    }
+  
+    return this.db.koncert.create({
+      data,
+    });
   }
 
   findAll() {
