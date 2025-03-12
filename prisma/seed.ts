@@ -4,7 +4,7 @@ import { faker } from "@faker-js/faker";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Seeding database with fake car data...');
+
 
   for( let i = 0; i < 10 ; i++){
     await prisma.koncert.create({
@@ -12,7 +12,7 @@ async function main() {
         fellepo: faker.music.artist(),
         kezdesi_ido: faker.date.future(),
         idotartam: faker.number.int({min: (60), max:(140)}),
-        elmarad_e: faker.datatype.boolean()
+        elmarad_e: faker.datatype.boolean(0)
       }
     })
   }
