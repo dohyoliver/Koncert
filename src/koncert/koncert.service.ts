@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateKoncertDto } from './dto/create-koncert.dto';
 import { UpdateKoncertDto } from './dto/update-koncert.dto';
 import { PrismaService } from 'src/prisma.service';
@@ -13,7 +13,7 @@ export class KoncertService {
     
    
     if (new Date(data.kezdesi_ido) < currentDate) {
-      throw new Error('The concert date cannot be in the past.');
+      throw new NotFoundException('The concert date cannot be in the past.');
     }
   
     return this.db.koncert.create({
